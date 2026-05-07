@@ -426,15 +426,18 @@ cols <- c("S3"="#785EF0","CA + S3"="#DC267F","Blank media"="#648FFF")
 v1 <- ggplot(s3ca, aes(x = Days)) + geom_line(aes(y = S3_media_avg_cp, group = 1, color = "S3")) + 
   geom_point(aes(y = S3_media_avg_cp, color = "S3")) +
   geom_errorbar(aes(ymax = S3_media_avg_cp + S3_media_std_cp, 
-                    ymin = S3_media_avg_cp - S3_media_std_cp, color = "S3")) +
+                    ymin = S3_media_avg_cp - S3_media_std_cp, color = "S3"),
+                width = 0.3) + # adjust 0-1, 0 = no caps) 
   geom_line(aes(y = S3_media_CA_avg_cp, group = 1, color = "CA + S3")) + 
   geom_point(aes(y = S3_media_CA_avg_cp, color = "CA + S3")) + 
   geom_errorbar(aes(ymax = S3_media_CA_avg_cp + S3_media_CA_std_cp, 
-                    ymin = S3_media_CA_avg_cp - S3_media_CA_std_cp, color = "CA + S3")) +
+                    ymin = S3_media_CA_avg_cp - S3_media_CA_std_cp, color = "CA + S3"),
+                width = 0.3) + # adjust 0-1, 0 = no caps)
   geom_line(aes(y = media_avg_cp, group = 1, color = "Blank media")) + 
   geom_point(aes(y = media_avg_cp, color = "Blank media")) + 
   geom_errorbar(aes(ymax = media_avg_cp + media_std_cp, 
-                    ymin = media_avg_cp - media_std_cp, color = "Blank media")) +
+                    ymin = media_avg_cp - media_std_cp, color = "Blank media"),
+                width = 0.3) + # adjust 0-1, 0 = no caps) 
   labs(
     #title = "CA",
     x = "Day",
@@ -443,7 +446,7 @@ v1 <- ggplot(s3ca, aes(x = Days)) + geom_line(aes(y = S3_media_avg_cp, group = 1
   scale_x_continuous(breaks = c(0,7,13), expand = c(0, 0)) +
   scale_y_continuous(limits = c(-.7, 10), breaks = seq(0, 10, by = 2)) +
   theme_classic() +
-  scale_color_manual(name = "Condition", values = cols, breaks = c("CA + S3", "S3", "Blank media")) +
+  scale_color_manual(name = "Condition", values = cols, breaks = c("CA + S3", "S3", "Media")) +
   theme(axis.text = element_text(size = 12),
         axis.title = element_text(size = 12),
         plot.title = element_text(size = 14),
@@ -464,15 +467,18 @@ cols <- c("G1"="#785EF0","PHA + G1"="#DC267F","Blank media"="#648FFF")
 w1 <- ggplot(g1pha, aes(x = Day)) + geom_line(aes(y = G1_media_avg_cp, group = 1, color = "G1")) + 
   geom_point(aes(y = G1_media_avg_cp, color = "G1")) +
   geom_errorbar(aes(ymax = G1_media_avg_cp + G1_media_std_cp, 
-                    ymin = G1_media_avg_cp - G1_media_std_cp, color = "G1")) +
+                    ymin = G1_media_avg_cp - G1_media_std_cp, color = "G1"),
+                width = 0.2) + # adjust 0-1, 0 = no caps)
   geom_line(aes(y = G1_PHA_media_avg_cp, group = 1, color = "PHA + G1")) + 
   geom_point(aes(y = G1_PHA_media_avg_cp, color = "PHA + G1")) + 
   geom_errorbar(aes(ymax = G1_PHA_media_avg_cp + G1_PHA_media_std_cp, 
-                    ymin = G1_PHA_media_avg_cp - G1_PHA_media_std_cp, color = "PHA + G1")) +
+                    ymin = G1_PHA_media_avg_cp - G1_PHA_media_std_cp, color = "PHA + G1"),
+                width = 0.2) + # adjust 0-1, 0 = no caps)
   geom_line(aes(y = media_avg_cp, group = 1, color = "Blank media")) + 
   geom_point(aes(y = media_avg_cp, color = "Blank media")) + 
   geom_errorbar(aes(ymax = media_avg_cp + media_std_cp, 
-                    ymin = media_avg_cp - media_std_cp, color = "Blank media")) +
+                    ymin = media_avg_cp - media_std_cp, color = "Blank media"),
+                width = 0.2) + # adjust 0-1, 0 = no caps)
   labs(
     #title = "CA",
     x = "Day",
@@ -481,7 +487,7 @@ w1 <- ggplot(g1pha, aes(x = Day)) + geom_line(aes(y = G1_media_avg_cp, group = 1
   scale_x_continuous(breaks = c(0,4,8)) +
   scale_y_continuous(limits = c(-.7, 10), breaks = seq(0, 10, by = 2)) +
   theme_classic() +
-  scale_color_manual(name = "Condition", values = cols, breaks = c("PHA + G1", "G1", "Blank media")) +
+  scale_color_manual(name = "Condition", values = cols, breaks = c("PHA + G1", "G1", "Media")) +
   theme(axis.text = element_text(size = 12),
         axis.title = element_text(size = 12),
         plot.title = element_text(size = 14),
@@ -494,6 +500,13 @@ w1
 library(ggpubr)
 deg_plot4 <- ggarrange(v1, w1, ncol=1, nrow=2, labels = c("A)", "B)"))
 deg_plot4
+
+
+# 05/06/2026 perform statistical analysis on CA + S3 vs S3 and PHA + G1 vs G1
+
+
+
+
 
 
 library(cowplot)
